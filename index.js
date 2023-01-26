@@ -3,19 +3,28 @@ const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const fs = require("fs");
+// let team = [];
+let team = [new Manager("McCoy", "2948", "mccoy@gmail.com", "234"), 
+    new Intern("Ty", "20383", "ty@gmail.com", "USU"),
+    new Engineer("Travis", "9382", "travis@gmail.com", "travisd")]
 
 
+function generateHTML() {
+    for(member of team) {
+        console.log(member.getRole());
+    }
+}
 
 function createNewManager(response) {
-    const manager = new Manager(response.managerName, response.managerId, response.managerEmail, response.managerOfficeNumber);
+    team.push(new Manager(response.managerName, response.managerId, response.managerEmail, response.managerOfficeNumber));
 }
 
 function createNewEngineer(response) {
-    const engineer = new Engineer(response.engineerName, response.engineerId, response.engineerEmail, response.engineerGithub);
+    team.push(new Engineer(response.engineerName, response.engineerId, response.engineerEmail, response.engineerGithub));
 }
 
 function createNewIntern(response) {
-    const intern = new Intern(response.internName, response.internId, response.internEmail, response.internSchool);
+    team.push(new Intern(response.internName, response.internId, response.internEmail, response.internSchool));
 }
 
 function askForIntern() {
@@ -92,12 +101,12 @@ function askForEmployee() {
             }
         ])
         .then(function (response) {
-            console.log(response);
             if (response.employeeType === "Engineer") {
                 askForEngineer();
             } else if (response.employeeType === "Intern") {
                 askForIntern();
             } else {
+                generateHTML();
                 console.log("Done");
             }
         })
@@ -134,7 +143,5 @@ function start() {
         })
 }
 
-
-
-
-start();
+//start();
+generateHTML();
