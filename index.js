@@ -3,11 +3,7 @@ const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const fs = require("fs");
-// let team = [];
-let team = [new Manager("McCoy", "2948", "mccoy@gmail.com", "234"), 
-    new Intern("Ty", "20383", "ty@gmail.com", "USU"),
-    new Engineer("Travis", "9382", "travis@gmail.com", "travisd")]
-
+let team = [];
 
 function getLastItemContents(member){
     if(member.getRole() === "Manager"){
@@ -63,7 +59,7 @@ function generateHTML() {
 
     fs.writeFile("./dist/output.html", finalHTML, (err) => {
         if (err) throw err;
-        console.log("The file has been saved!");
+        console.log("Your HTML file has been generated!");
     });
 }
 
@@ -157,7 +153,6 @@ function askForEmployee() {
                 askForIntern();
             } else {
                 generateHTML();
-                console.log("Done");
             }
         })
 }
@@ -192,5 +187,4 @@ function start() {
         })
 }
 
-//start();
-generateHTML();
+start();
